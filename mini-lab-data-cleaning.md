@@ -67,3 +67,8 @@ Your script should output a `sanitized_sample.json` that is:
 ### Discussion Question
 "Why did we use **ETL** (Cleaning before storage) for the PII masking instead of **ELT** (Cleaning after storage)?"
 *(Hint: Think about where the raw PII would be sitting if we used ELT).*
+
+**Answer:**
+We use **ETL** (Extract, Transform, Load) for PII masking instead of **ELT** (Extract, Load, Transform) due to **data privacy and security compliance**:
+- Under **ELT**, raw Personally Identifiable Information (PII) such as full names and unmasked emails would be loaded and stored in our data lake, warehouse, or Vector DB *before* any cleaning occurs. This poses a severe security risk (e.g., potential data breaches or unauthorized access) and potentially violates strict privacy regulations like GDPR.
+- Under **ETL**, we sanitize the data (removing names, masking emails) *before* loading it into storage. This guarantees that raw, sensitive PII is never persisted, keeping our storage secure and compliant from the start.
